@@ -1,0 +1,2 @@
+-   using the command uvicorn <file_name>:app ---> here if there is some change in the code we have to exit the server and 
+    then restart the server which is annoying so use the uvicorn <file_name>: app --reload after the command
