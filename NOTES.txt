@@ -1,2 +1,10 @@
 -   using the command uvicorn <file_name>:app ---> here if there is some change in the code we have to exit the server and 
     then restart the server which is annoying so use the uvicorn <file_name>: app --reload after the command
+
+-   Why do we need Schema??
+    -   it's a pain to get all the values from the body
+    -   client can send whatever data they want 
+    -   data isn't getting validated
+    -   we ultimately want to force the client to send the data according to the schema that we expect
+    -   more like a contract between the backend and the frontend to exchange data strictly in same format
+    -   Pydantic comes into the picture
