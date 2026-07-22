@@ -1,8 +1,16 @@
-from turtle import title
-from fastapi import Body, FastAPI
+from signal import pause
+from typing import Optional
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 
 app = FastAPI()
+
+class Post(BaseModel):
+    title: str
+    content: str
+    published: bool = True
+    rating: Optional[int] = None    # If something is optional then provide a default value
 
 #------- this is the path or the url --------
 @app.get("/")  # this decorator is what converts this function here into a route or in FASTAPI we say path operation
@@ -18,17 +26,14 @@ def get_posts():
 
 
 @app.post("/createposts")
-def create_posts(payload: dict = Body(...)):
+def create_posts(payload: Post): # pydantic will automatically validate the data it receives
     print(payload)
     print(type(payload))
-    data = {}
-    # for key in payload:
-    #     print(f"This is the {key}: {payload[key]}")
-    #     data[key] = payload[key]
-    for key,value in payload.items():
-        data[key]=value
+    print(payload.published)
     return {
         "message": "we received the data and the post is created",
-        "title": data["title"],
-        "content": data["content"]
+        "title": payload.title,
+        "content": payload.content,
+        "published": payload.published,
+        "rating": payload.rating
         }
