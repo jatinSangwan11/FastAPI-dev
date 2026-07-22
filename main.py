@@ -22,9 +22,11 @@ def create_posts(payload: dict = Body(...)):
     print(payload)
     print(type(payload))
     data = {}
-    for key in payload:
-        print(f"This is the {key}: {payload[key]}")
-        data[key] = payload[key]
+    # for key in payload:
+    #     print(f"This is the {key}: {payload[key]}")
+    #     data[key] = payload[key]
+    for key,value in payload.items():
+        data[key]=value
     return {
         "message": "we received the data and the post is created",
         "title": data["title"],
